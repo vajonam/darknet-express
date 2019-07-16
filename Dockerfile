@@ -7,7 +7,6 @@ RUN git clone https://github.com/bennetthardwick/darknet.js.git darknet
 WORKDIR /darknet
 
 ENV DARKNET_BUILD_WITH_OPENMP=1 
-ENV DARKNET_BUILD_WITH_GPU=1
 RUN npm install --unsafe-perm
 
 # RUN examples/example
