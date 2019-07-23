@@ -6,7 +6,7 @@ require('log-timestamp');
 
 var app = express()
 
-const { Darknet } = require('../darknet');
+const { Darknet } = require('darknet');
 
 const darknet = new Darknet({
     weights: 'yolov3.weights',

@@ -1,9 +1,10 @@
 {
-  "name": "darknet-yolo3",
-  "version": "0.0.1",
-  "description": "",
+  "name": "darknet-express",
+  "version": "0.0.2",
+  "description": "Expressed based API for Darknet Detection",
   "main": "server.js",
   "dependencies": {
+    "darknet": "^2.0.10",
     "express": "^4.15.2",
     "log-timestamp": "^0.3.0",
     "multer": "^1.3.0"

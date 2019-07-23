@@ -1,15 +1,13 @@
-FROM node:6
+FROM node
 
-RUN apt-get update -y  && apt-get upgrade -y
-
-RUN git clone https://github.com/bennetthardwick/darknet.js.git darknet
-
-WORKDIR /darknet
+RUN apt-get update -y  && apt-get -y upgrade
 
 ENV DARKNET_BUILD_WITH_OPENMP=1 
-RUN npm install --unsafe-perm
+ENV DARKNET_BUILD_WITH_OPENCV=0 
 
-# RUN examples/example
+# COPY install-script.sh /darknet/
+# RUN npm install --unsafe-perm
+
 
 RUN mkdir /server
 
