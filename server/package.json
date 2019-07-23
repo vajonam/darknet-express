@@ -1,6 +1,6 @@
 {
   "name": "darknet-express",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Expressed based API for Darknet Detection",
   "main": "server.js",
   "dependencies": {
@@ -17,5 +17,17 @@
     "test": "standard"
   },
   "author": "vajonam",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vajonam/darknet-express.git"
+  },
+  "keywords": [
+    "darknet",
+    "node.js"
+  ],
+  "bugs": {
+    "url": "https://github.com/vajonam/darknet-express/issues"
+  },
+  "homepage": "https://github.com/vajonam/darknet-express#readme"
 }
