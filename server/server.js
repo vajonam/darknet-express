@@ -23,6 +23,14 @@ const darknet_tiny = new Darknet({
 app.post('/yolo', upload.single('photo'), function (req, res, next) {
   var filename = `./${req.file.destination}${req.file.filename}`
   console.log(`-- yolo received --: ${filename}`)
+  if (req.file.size < 100) {
+    fs.unlink(filename, d => { })
+    console.log(`-- invalid file`);
+    res.json({});
+    return;
+      
+  }
+  
   var predictions = "";
   try {
     console.time("Detection");
@@ -34,18 +42,36 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
   }
   var result = "";
 
-  predictions.forEach(function (prediction) {
+  const { createCanvas, loadImage } = require('canvas')
+  const canvas = createCanvas(1280, 720)
+  const ctx = canvas.getContext('2d')
 
-    result += prediction.name + ":" + prediction.prob.toFixed(2) + ",";
+  loadImage(filename).then((image) => {
+    ctx.drawImage(image, 0, 0)
+    ctx.strokeStyle = 'rgba(255,0,0,1)'
+    ctx.lineWidth = 2;
+    predictions.forEach(function (prediction) {
+      result += prediction.name + ":" + prediction.prob.toFixed(2) + ",";
+      ctx.strokeRect(prediction.box.x-prediction.box.w/2, prediction.box.y-prediction.box.h/2, prediction.box.w, prediction.box.h);
+    });
+    fs.writeFileSync('/tmp/test.png', canvas.toBuffer());
+    var retrunValue = {};
 
+    retrunValue.predictions = predictions;
+    retrunValue.image = canvas.toDataURL("image/jpeg");
+    console.log(retrunValue);
+    console.log(`-- yolo: predictions --: ${result}`);
+    res.json(retrunValue);
+    fs.unlink(filename, d => { })
+    console.log(`-- yolo processed  --: ${filename}`)
+  
 
   });
-  console.log(`-- yolo: predictions --: ${result}`);
-  res.json(predictions);
-  fs.unlink(filename, d => { })
-  console.log(`-- yolo processed  --: ${filename}`)
 
-})
+
+
+
+  })
 
 
 app.post('/yolo-tiny', upload.single('photo'), function (req, res, next) {
