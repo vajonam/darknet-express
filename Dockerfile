@@ -19,7 +19,6 @@ RUN wget -nc https://hal.manojav.com/yolo/yolov3-tiny.cfg
 RUN wget -nc https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
 
 COPY server/* /server/
-RUN npm install -g node-gyp
 RUN npm install
 
 EXPOSE 3000
