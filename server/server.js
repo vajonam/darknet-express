@@ -50,13 +50,14 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
     ctx.drawImage(image, 0, 0)
     ctx.strokeStyle = 'rgba(255,0,0,1)';
     ctx.lineWidth = 2;
-    ctx.fillStyle = 'rgba(255,0,0,0.20)';
     predictions.forEach(function (prediction) {
       var result = prediction.name + " : " + prediction.prob.toFixed(2)*100 + "%";
       ctx.lineWidth = 2;
+      ctx.fillStyle = 'rgba(255,0,0,0.20)';
       ctx.fillRect(prediction.box.x-prediction.box.w/2, prediction.box.y-prediction.box.h/2, prediction.box.w, prediction.box.h);
       ctx.lineWidth = 1;
       ctx.font = '30px';
+      ctx.fillStyle = 'rgba(255,255,255,1)';
       ctx.fillText(result, (prediction.box.x-prediction.box.w/2)+10,  (prediction.box.y-prediction.box.h/2)+20);
     });
     fs.writeFileSync('/tmp/test.png', canvas.toBuffer());

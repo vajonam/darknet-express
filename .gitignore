@@ -1,0 +1,6 @@
+server/node_modules
+server/uploads
+server/yolo*
+server/coco.names
+server/*.png
+server/*.jpg 
