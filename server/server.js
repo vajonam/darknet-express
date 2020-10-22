@@ -51,7 +51,7 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
     ctx.strokeStyle = 'rgba(255,0,0,1)';
     ctx.lineWidth = 2;
     predictions.forEach(function (prediction) {
-      var result = prediction.name + " : " + prediction.prob.toFixed(2)*100 + "%";
+      var result = prediction.name + " : " +  (Math.ceil(prediction.prob*20 - 0.5)/20).toFixed(2) + "%";
       ctx.lineWidth = 2;
       ctx.fillStyle = 'rgba(255,0,0,0.20)';
       ctx.fillRect(prediction.box.x-prediction.box.w/2, prediction.box.y-prediction.box.h/2, prediction.box.w, prediction.box.h);
