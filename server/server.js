@@ -56,7 +56,7 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
       ctx.fillStyle = 'rgba(255,0,0,0.20)';
       ctx.fillRect(prediction.box.x-prediction.box.w/2, prediction.box.y-prediction.box.h/2, prediction.box.w, prediction.box.h);
       ctx.lineWidth = 1;
-      ctx.font = '30px';
+      ctx.font = '40px';
       ctx.fillStyle = 'rgba(255,255,255,1)';
       ctx.fillText(result, (prediction.box.x-prediction.box.w/2)+10,  (prediction.box.y-prediction.box.h/2)+20);
     });
