@@ -12,10 +12,8 @@ ENV DARKNET_BUILD_WITH_OPENCV=0
 RUN mkdir /server
 
 WORKDIR /server
-RUN wget -nc https://hal.manojav.com/yolo/yolov3.weights
-RUN wget -nc https://hal.manojav.com/yolo/yolov3.cfg
-RUN wget -nc https://hal.manojav.com/yolo/yolov3-tiny.weights
-RUN wget -nc https://hal.manojav.com/yolo/yolov3-tiny.cfg
+RUN wget -nc https://hal.manojav.com/yolo/yolov4.weights
+RUN wget -nc https://hal.manojav.com/yolo/yolov4.cfg
 RUN wget -nc https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
 
 COPY server/* /server/
