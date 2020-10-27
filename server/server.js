@@ -43,10 +43,12 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
   var result = "";
 
   const { createCanvas, loadImage } = require('canvas')
-  const canvas = createCanvas(1280, 720)
-  const ctx = canvas.getContext('2d')
+
 
   loadImage(filename).then((image) => {
+
+    const canvas = createCanvas(image.width, image.height);
+    const ctx = canvas.getContext('2d')
     ctx.drawImage(image, 0, 0)
     ctx.strokeStyle = 'rgba(255,0,0,1)';
     ctx.lineWidth = 2;
@@ -65,8 +67,9 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
 
     retrunValue.predictions = predictions;
     retrunValue.image = canvas.toDataURL("image/jpeg");
+    console.log(`-- yolo: predictions start :`);
     console.log(retrunValue.predictions);
-    console.log(`-- yolo: predictions --: ${result}`);
+    console.log(`-- yolo: predictions end :`);
     res.json(retrunValue);
     fs.unlink(filename, d => { })
     console.log(`-- yolo processed  --: ${filename}`)
