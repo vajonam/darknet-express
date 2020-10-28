@@ -56,14 +56,11 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
       ctx.fillStyle = 'rgba(255,255,255,1)';
       ctx.fillText(result, (prediction.box.x-prediction.box.w/2)+10,  (prediction.box.y-prediction.box.h/2)+20);
     });
-    fs.writeFileSync('/tmp/test.png', canvas.toBuffer());
     var retrunValue = {};
 
     retrunValue.predictions = predictions;
     retrunValue.image = canvas.toDataURL("image/jpeg");
-    console.log(`-- yolo: predictions start :`);
     console.log(retrunValue.predictions);
-    console.log(`-- yolo: predictions end :`);
     res.json(retrunValue);
     fs.unlink(filename, d => { })
     console.log(`-- yolo processed  --: ${filename}`)
