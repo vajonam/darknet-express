@@ -1,10 +1,15 @@
 var express = require('express')
 var multer = require('multer')
 var upload = multer({ dest: 'uploads/' })
+var bodyParser = require('body-parser');
+
 var fs = require('fs')
 require('log-timestamp');
 
 var app = express()
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
+
 
 const { Darknet } = require('darknet');
 
@@ -17,6 +22,10 @@ const darknet = new Darknet({
 app.post('/yolo', upload.single('photo'), function (req, res, next) {
   var filename = `./${req.file.destination}${req.file.filename}`
   console.log(`-- yolo received --: ${filename}`)
+  const refobjects = {}
+  if (req.body.refobjects)
+    refobjects = JSON.parse(req.body.refobjects)
+
   if (req.file.size < 100) {
     fs.unlink(filename, d => { })
     console.log(`-- invalid file`);
@@ -56,6 +65,17 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
       ctx.fillStyle = 'rgba(255,255,255,1)';
       ctx.fillText(result, (prediction.box.x-prediction.box.w/2)+10,  (prediction.box.y-prediction.box.h/2)+20);
     });
+
+    if (refobjects != null) {
+      for (let [key, value] of Object.entries(refobjects)) {
+        ctx.fillStyle = 'rgba(0,255,0,0.20)';
+        ctx.fillRect(value.x-value.w/2, value.y-value.h/2, value.w, value.h);
+        ctx.font = '40px';
+        ctx.fillStyle = 'rgba(255,255,255,1)';
+        ctx.fillText(key, (value.x-value.w/2)+10,  (value.y-value.h/2)+20);
+      }
+    }
+
     var retrunValue = {};
 
     retrunValue.predictions = predictions;
