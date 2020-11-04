@@ -68,10 +68,12 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
 
     if (refobjects != null) {
       for (let [key, value] of Object.entries(refobjects)) {
-        ctx.fillStyle = 'rgba(0,255,0,0.20)';
-        ctx.fillRect(value.x-value.w/2, value.y-value.h/2, value.w, value.h);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(0,255,0,0.80)';
+        ctx.strokeRect(value.x-value.w/2, value.y-value.h/2, value.w, value.h);
+        ctx.lineWidth = 1;
         ctx.font = '40px';
-        ctx.fillStyle = 'rgba(255,255,255,1)';
+        ctx.fillStyle = 'rgba(50,50,50,1)';
         ctx.fillText(key, (value.x-value.w/2)+10,  (value.y-value.h/2)+20);
       }
     }
