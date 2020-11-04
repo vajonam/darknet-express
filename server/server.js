@@ -81,7 +81,7 @@ app.post('/yolo', upload.single('photo'), function (req, res, next) {
     var retrunValue = {};
 
     retrunValue.predictions = predictions;
-    retrunValue.image = canvas.toBuffer("image/jpeg");
+    retrunValue.image = canvas.toBuffer("image/jpeg",  { quality: 0.8 });
     console.log(retrunValue.predictions);
     res.json(retrunValue);
     fs.unlink(filename, d => { })
