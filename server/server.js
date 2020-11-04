@@ -22,7 +22,7 @@ const darknet = new Darknet({
 app.post('/yolo', upload.single('photo'), function (req, res, next) {
   var filename = `./${req.file.destination}${req.file.filename}`
   console.log(`-- yolo received --: ${filename}`)
-  const refobjects = {}
+  let refobjects = {}
   if (req.body.refobjects)
     refobjects = JSON.parse(req.body.refobjects)
 
