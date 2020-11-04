@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 const { Darknet } = require('darknet');
 
 const darknet = new Darknet({
-  weights: 'yolov4.weights',
-  config: 'yolov4.cfg',
+  weights: 'yolov4-mish-416.weights',
+  config: 'yolov4-mish-416.cfg',
   namefile: 'coco.names'
 });
 
